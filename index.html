@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <title>Frontend Mentor | Intro component with sign up form</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="hero">
+      <h1>Learn to code by watching others</h1>
+      <p>See how experienced developers solve problems in real-time. Watching scripted tutorials is great,
+        but understanding how developers think is invaluable. </p>
+    </div>
+    <div class="cta">
+      <div class="cta__info"><strong>Try it free 7 days</strong> then $20/mo. thereafter</div>
+
+      <form class="cta__form" action="#">
+        <div class="field">
+          <label for="firstName">First Name</label>
+          <input type="text" name="firstName" id="firstName" placeholder="First Name" required
+            data-error-message='First Name cannot be empty'>
+          <span class="field__message"></span>
+        </div>
+        <div class="field">
+          <label for="lastName">Last Name</label>
+          <input type="text" name="lastName" id="lastName" placeholder="Last Name" required
+            data-error-message='Last Name cannot be empty'>
+          <span class="field__message"></span>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" placeholder="Email Address" required
+            data-error-message='Looks like this is not an email'>
+          <span class="field__message"></span>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" placeholder="Password" required
+            data-error-message='Password cannot be empty'>
+          <span class="field__message"></span>
+        </div>
+        <div class="field">
+          <button class="button">Claim your free trial</button>
+        </div>
+        <p class="cta__disclaimer">By clicking the button, you are agreeing to our <a href="#">Terms and Services</a>
+        </p>
+      </form>
+
+    </div>
+  </div>
+
+  <footer>
+    <p class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a href="https://github.com/nmorajda" target="_blank">N. Morajda</a>.
+    </p>
+  </footer>
+
+  <script>
+    const form = document.querySelector('form');
+    const inputs = form.querySelectorAll('input:not([type="submit"]), select, textarea');
+    const submit = document.querySelector('button');
+
+    function showSuccess(input) {
+      input.parentElement.className = 'field success';
+      input.nextElementSibling.textContent = '';
+    }
+
+    function showError(input) {
+      input.parentElement.className = 'field error';
+      input.nextElementSibling.textContent = input.dataset.errorMessage;
+    }
+
+    // Disable browser validation
+    form.novalidate = true;
+    // Disable submit btn
+    submit.disabled = true;
+
+    // Events
+    // Check input validity
+    inputs.forEach(input => {
+      input.addEventListener('blur', () => {
+        input.validity.valid ? showSuccess(input) : showError(input)
+      })
+    });
+
+    // Check form validity 
+    form.addEventListener("change", (e) => {
+      submit.disabled = !form.checkValidity();
+    });
+  </script>
+</body>
+
+</html>
